@@ -1,7 +1,7 @@
-import { instance } from "../../../store/api/api"
+import { instance } from '../../../shared/lib/api/api';
 
 export const apiUsers = {
-    getUsers: () => {
-        return instance.get("/users?_limit=6")
-    }
-}
+  getUsers: () => {
+    return instance.get('/users?_limit=6');
+  },
+};

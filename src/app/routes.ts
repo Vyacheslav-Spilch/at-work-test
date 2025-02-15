@@ -1,5 +1,4 @@
 export enum Routers {
-    main = "/",
-    user = "/user"
+  main = '/',
+  user = '/user',
 }
-

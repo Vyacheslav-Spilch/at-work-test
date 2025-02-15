@@ -1,22 +1,17 @@
-import s from "./style.module.css"
-import { CloseIcon } from "../../icons/close"
-import { DoneIcon } from "../../icons/done"
+import s from './style.module.css';
+import { CloseIcon } from '../../icons/close';
+import { DoneIcon } from '../../icons/done';
 
 interface FeedBackProps {
-    onClick: () => void
+  onClick: () => void;
 }
 
 export const FeedBack = ({ onClick }: FeedBackProps) => {
-
-
-    return (
-        <div className={s.container}>
-            <CloseIcon 
-                className={s.close} 
-                onClick={onClick}
-            />
-            <DoneIcon />
-            <span className={s.message}>Изменения сохранены!</span>
-        </div>
-    )
-}
+  return (
+    <div className={s.container}>
+      <CloseIcon className={s.close} onClick={onClick} />
+      <DoneIcon />
+      <span className={s.message}>Изменения сохранены!</span>
+    </div>
+  );
+};

@@ -1,6 +1,6 @@
-import { AppDispatch } from "./store";
+import { AppDispatch } from './store';
 
 export interface ThunkConfig {
-    dispatch: AppDispatch;
-    rejectValue: string;
+  dispatch: AppDispatch;
+  rejectValue: string;
 }
