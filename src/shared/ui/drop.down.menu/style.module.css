@@ -1,0 +1,54 @@
+.container_drop {
+    width: 200px;
+    border-radius: 12px;
+    padding: 8px;
+    gap: 8px;
+    background-color: #FDFDFD;
+    box-shadow: 0 0 10px #b9b8b8;
+    position: absolute;
+    display: none;
+}
+.visible {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    top: -10px;
+    right: 40px;
+    opacity: 1;
+}
+.box_point {
+    width: 184px;
+    min-height: 38px;
+    border-radius: 8px;
+    gap: 8px;
+}
+.btn_point {
+    font-size: 16px;
+    font-weight: 600;
+    color: #161616;
+    border: none;
+    background-color: transparent;
+    padding: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+
+}
+.btn_point:hover {
+    background-color: #ebeaea;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+@media (max-width: 600px) {
+    .container_drop {
+        width: 160px;
+    }
+    .visible {
+        top: -20px;
+        right: 20px;
+        opacity: 1;
+    }
+}

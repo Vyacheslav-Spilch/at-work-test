@@ -1,0 +1,14 @@
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 49px;
+    background-color: transparent;
+    border-bottom: 1px solid #DADADA;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #161616;
+}
