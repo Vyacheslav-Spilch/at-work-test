@@ -8,22 +8,22 @@ import { useActionsUserCard } from '../hooks/useActionsUserCard';
 
 interface UserCardProps {
   id: number;
-  archive: boolean;
+  isArchive: boolean;
   username: string;
   city: string;
   companyName: string;
 }
 
-export const UserCard = ({ id, archive, username, city, companyName }: UserCardProps) => {
+export const UserCard = ({ id, isArchive, username, city, companyName }: UserCardProps) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
-  const { userActionsList } = useActionsUserCard(archive);
+  const { userActionsList } = useActionsUserCard(isArchive);
 
   const onHandleOpenDropMenu = () => {
     setIsOpenDropDown((prev) => !prev);
   };
 
   return (
-    <main className={`${s.container} ${archive && s.archive}`}>
+    <main className={`${s.container} ${isArchive && s.archive}`}>
       <img className={s.image} src={imageUser} alt={`Пользователь ${username}`} />
       <section className={s.box_info}>
         <div className={s.box_top}>

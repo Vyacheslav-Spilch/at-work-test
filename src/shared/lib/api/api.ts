@@ -1,5 +1,6 @@
 import axios from 'axios';
+import { APP_PATHS } from './paths/app.paths';
 
 export const instance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: APP_PATHS.rootPath,
 });

@@ -19,7 +19,7 @@ export type UserReturnData<T = Record<string, string>> = {
   };
 };
 
-export type IUser = Omit<UserReturnData, 'address' | 'website' | 'company'> & {
+export type IUser = Omit<UserReturnData, 'address' | 'company'> & {
   isArchive: boolean;
   company: string;
   city: string;

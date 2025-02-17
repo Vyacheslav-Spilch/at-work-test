@@ -14,8 +14,6 @@ export const UserCardsGroup = ({ users }: UserCardsGroupProps) => {
   const isLoading = useAppSelector(selectUserIsLoading);
   const memoUsers = useMemo(() => users, [users]);
 
-  console.log(users);
-
   return (
     <div className={s.container}>
       {isLoading === 'succeeded' ? (
@@ -23,7 +21,7 @@ export const UserCardsGroup = ({ users }: UserCardsGroupProps) => {
           <UserCard
             key={user.id}
             id={user.id}
-            archive={user.isArchive}
+            isArchive={user.isArchive}
             username={user.username}
             companyName={user.company}
             city={user.city}

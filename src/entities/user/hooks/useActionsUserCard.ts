@@ -5,14 +5,14 @@ import { deleteUser, moveToArchive, removeFromArchive } from '@/store/slices/use
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const useActionsUserCard = (archive: boolean) => {
+export const useActionsUserCard = (isArchive: boolean) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [userActionsList, setUserActionsList] = useState<IDropDownMenuItems[]>([]);
 
   useEffect(() => {
-    const actions = archive
+    const actions = isArchive
       ? [
           {
             actionName: 'Активировать',
@@ -43,7 +43,7 @@ export const useActionsUserCard = (archive: boolean) => {
         ];
 
     setUserActionsList((prevList) => [...prevList, ...actions]);
-  }, [archive, dispatch, navigate]);
+  }, [isArchive, dispatch, navigate]);
 
   return { userActionsList };
 };

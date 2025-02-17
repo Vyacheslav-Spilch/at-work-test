@@ -83,7 +83,7 @@ export const getAllUsers = createAppAsyncThunk<IUser[], void, ThunkConfig>(
   async (_, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const res = await APIUsers.fetchAllUsers();
+      const res = await APIUsers.fetchAllUsers({ limit: 6 });
       if (res) {
         return res.data.map((user: UserReturnData) => ({
           ...user,

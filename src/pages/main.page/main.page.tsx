@@ -1,11 +1,11 @@
 import { Title } from '@/shared/ui/title/ui/title';
 import { useAppSelector } from '@/store/hooks';
 import { UserCardsGroup } from '@/widgets/index';
-import { selectUsersActive, selectUsersArchive } from '@/store/selectors/users/usersSelectors';
+import { selectUsersIsActive, selectUsersIsArchive } from '@/store/selectors/users/usersSelectors';
 
 export const MainPage = () => {
-  const usersActive = useAppSelector(selectUsersActive);
-  const usersArchive = useAppSelector(selectUsersArchive);
+  const usersActive = useAppSelector(selectUsersIsActive);
+  const usersArchive = useAppSelector(selectUsersIsArchive);
 
   return (
     <>
