@@ -92,7 +92,7 @@ export const getAllUsers = createAppAsyncThunk<IUser[], void, ThunkConfig>(
           email: user.email,
           company: user.company.name,
           city: user.address.city,
-          archive: false,
+          isArchive: false,
         }));
       } else {
         throw Error('error');
@@ -111,9 +111,13 @@ export const getUserById = createAppAsyncThunk<IUser, number, ThunkConfig>(
       if (user) {
         return {
           ...user,
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
           company: user.company.name,
-          archive: false,
           city: user.address.city,
+          isArchive: user.isArchive,
         };
       } else {
         throw Error('error');
