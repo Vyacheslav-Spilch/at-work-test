@@ -86,10 +86,13 @@ export const getAllUsers = createAppAsyncThunk<IUser[], void, ThunkConfig>(
       const res = await APIUsers.fetchAllUsers({ limit: 6 });
       if (res) {
         return res.data.map((user: UserReturnData) => ({
-          ...user,
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
           company: user.company.name,
-          archive: false,
           city: user.address.city,
+          archive: false,
         }));
       } else {
         throw Error('error');
