@@ -90,6 +90,7 @@ export const getAllUsers = createAppAsyncThunk<IUser[], void, ThunkConfig>(
           name: user.name,
           username: user.username,
           email: user.email,
+          phone: user.phone,
           company: user.company.name,
           city: user.address.city,
           isArchive: false,
@@ -110,11 +111,11 @@ export const getUserById = createAppAsyncThunk<IUser, number, ThunkConfig>(
       const { data: user } = await APIUsers.fetchUserById(id);
       if (user) {
         return {
-          ...user,
           id: user.id,
           name: user.name,
           username: user.username,
           email: user.email,
+          phone: user.phone,
           company: user.company.name,
           city: user.address.city,
           isArchive: user.isArchive,

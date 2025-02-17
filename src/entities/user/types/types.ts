@@ -19,10 +19,15 @@ export type UserReturnData<T = Record<string, string>> = {
   };
 };
 
-export type IUser = Omit<UserReturnData, 'address' | 'website' | 'company'> & {
-  isArchive: boolean;
+export type IUser = {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
   company: string;
   city: string;
+  isArchive: boolean;
 };
 
 export type UserFieldLabel = 'Имя' | 'Никнейм' | 'Почта' | 'Город' | 'Телефон' | 'Название компании';
