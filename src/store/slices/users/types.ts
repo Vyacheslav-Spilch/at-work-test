@@ -4,7 +4,7 @@ type IsLoadingType = 'idle' | 'pending' | 'succeeded' | 'failed';
 type IsErrorType = null | string;
 
 export type UsersSliceType = {
-  users: IUser[];
-  loading: IsLoadingType;
+  userList: IUser[];
+  isLoading: IsLoadingType;
   error: IsErrorType;
 };

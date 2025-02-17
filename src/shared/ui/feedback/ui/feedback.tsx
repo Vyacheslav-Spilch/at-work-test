@@ -1,6 +1,5 @@
+import { CloseIcon, DoneIcon } from '@/shared/icons';
 import s from './style.module.css';
-import { CloseIcon } from '../../icons/close';
-import { DoneIcon } from '../../icons/done';
 
 interface FeedBackProps {
   onClick: () => void;

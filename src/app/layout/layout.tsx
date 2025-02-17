@@ -1,11 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Wrapper } from '../../widgets/wrapper/wrapper';
-import { MainPage } from '../../pages/main.page/main.page';
-import { Routers } from './../routes';
-import { UserPage } from '../../pages/user.page/user.page';
-import { Header } from '../../widgets/header/header';
-import { useScrollToTop } from '../../shared/lib/hooks/usescroll.to.top';
-import { ErrorPage } from '../../pages/error.page/error.page';
+import { Wrapper, Header } from '@/widgets/index';
+import { MainPage, UserPage, ErrorPage } from '@/pages/index';
+import { useScrollToTop } from '@/shared/lib/hooks/useScrollToTop';
+import { Routers } from '../routers/app.routers';
 
 export const Layout = () => {
   useScrollToTop();
@@ -14,10 +11,10 @@ export const Layout = () => {
     <Wrapper>
       <Header />
       <Routes>
-        <Route path={Routers.main} element={<MainPage />} />
-        <Route path={`${Routers.user}/:id`} element={<UserPage />} />
-        <Route path="*" element={<Navigate to={'/404'} />} />
-        <Route path="/404" element={<ErrorPage />} />
+        <Route path={Routers.MAIN} element={<MainPage />} />
+        <Route path={`${Routers.USER}/:id`} element={<UserPage />} />
+        <Route path="*" element={<Navigate to={Routers.ERROR} />} />
+        <Route path={Routers.ERROR} element={<ErrorPage />} />
       </Routes>
     </Wrapper>
   );

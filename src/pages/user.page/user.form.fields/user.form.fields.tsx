@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, FeedBack, Title } from './../../../shared/ui/index';
+import { Button, FeedBack, Title } from '@/shared/ui/index';
 import s from './style.module.css';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  userFieldList,
-  userFieldsSchema,
-  UserFormType,
-} from './validation/validation';
-import { useAppDispatch } from '../../../store/hooks';
-import { BoxField } from '../../../shared/ui/box.field/box.field';
-import { CheckForSpaces } from '../../../shared/lib/utils/check.for.spaces';
-import { Spinner } from './../../../shared/icons/spinner';
-import { updateUserInfo } from '../../../store/slices/users/usersSlice';
-import { IUser } from './../../../entities/user/types/types';
+import { useAppDispatch } from '@/store/hooks';
+import { BoxField } from '@/shared/ui/index';
+import { CheckForSpaces } from '@/shared/lib/utils/check.for.spaces';
+import { Spinner } from '@/shared/icons/spinner';
+import { updateUserInfo } from '@/store/slices/users/usersSlice';
+import { IUser } from '@/entities/user/types/types';
+import { userFormSchema, UserFormType } from '@/entities/user/validation/user.schema';
+import { userFieldList } from '@/entities/user/constants/constants';
 
 export const UserFormFields = ({ user }: { user: IUser }) => {
   const dispatch = useAppDispatch();
 
-  const [activeFeedBack, setActiveFeedBack] = useState(false);
+  const [isActiveFeedBack, setIsActiveFeedBack] = useState(false);
 
   const {
     register,
@@ -26,14 +23,14 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
     setValue,
     formState: { errors },
   } = useForm<UserFormType>({
-    resolver: zodResolver(userFieldsSchema),
+    resolver: zodResolver(userFormSchema),
   });
 
   useEffect(() => {
-    if (activeFeedBack) {
+    if (isActiveFeedBack) {
       const timer = setTimeout(() => {
-        if (activeFeedBack) {
-          setActiveFeedBack((prev) => !prev);
+        if (isActiveFeedBack) {
+          setIsActiveFeedBack((prev) => !prev);
         }
       }, 4000);
       return () => {
@@ -42,24 +39,22 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
         }
       };
     }
-  }, [activeFeedBack]);
+  }, [isActiveFeedBack]);
 
   const closeToFeedBack = () => {
-    setActiveFeedBack(false);
+    setIsActiveFeedBack(false);
   };
 
   const onHandleSubmitUserData = (data: UserFormType) => {
-    if (CheckForSpaces(data) && user) {
+    if (CheckForSpaces(data)) {
       dispatch(
         updateUserInfo({
-          user: { ...data, id: user.id, archive: user.archive },
-        }),
+          user: { ...data, id: user.id, isArchive: user.isArchive },
+        })
       );
-      setActiveFeedBack(true);
+      setIsActiveFeedBack(true);
     }
   };
-
-  console.log(user);
 
   return (
     <section className={s.container_form}>
@@ -76,11 +71,7 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
                 error={!!errors[field.value]}
                 setValue={setValue}
               />
-              {errors[field.value] && (
-                <span className={s.error_message}>
-                  {errors[field.value]?.message}
-                </span>
-              )}
+              {errors[field.value] && <span className={s.error_message}>{errors[field.value]?.message}</span>}
             </div>
           ))
         ) : (
@@ -88,7 +79,7 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
         )}
         <Button type="submit" text="Сохранить" />
       </form>
-      {activeFeedBack && (
+      {isActiveFeedBack && (
         <div className={s.wrapper_feedback}>
           <FeedBack onClick={closeToFeedBack} />
         </div>

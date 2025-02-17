@@ -1,13 +1,14 @@
-import { FavoriteIcon } from '../../shared/icons/favorite';
-import { Logo } from '../../shared/icons/logo';
-import { NotificationIcon } from '../../shared/icons/notification';
+import { LogoIcon, FavoriteIcon, NotificationIcon } from '@/shared/icons/index';
 import s from './style.module.css';
-import imageUser from './../../assets/userImage.jpeg';
+import imageUser from '@/assets/userImage.jpeg';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
     <header className={s.header}>
-      <Logo />
+      <Link to={'/'}>
+        <LogoIcon />
+      </Link>
       <div className={s.register_menu}>
         <div className={s.box_icon}>
           <FavoriteIcon />

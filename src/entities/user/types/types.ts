@@ -1,4 +1,4 @@
-export type UserReturnData = {
+export type UserReturnData<T = Record<string, string>> = {
   id: number;
   name: string;
   username: string;
@@ -8,7 +8,7 @@ export type UserReturnData = {
     suite: string;
     city: string;
     zipcode: string;
-    geo: any;
+    geo: T;
   };
   phone: string;
   website: string;
@@ -20,7 +20,16 @@ export type UserReturnData = {
 };
 
 export type IUser = Omit<UserReturnData, 'address' | 'website' | 'company'> & {
-  archive: boolean;
+  isArchive: boolean;
   company: string;
   city: string;
+};
+
+export type UserFieldLabel = 'Имя' | 'Никнейм' | 'Почта' | 'Город' | 'Телефон' | 'Название компании';
+
+export type UserFieldsKey = keyof Omit<IUser, 'id' | 'isArchive'>;
+
+export type UserField = {
+  label: UserFieldLabel;
+  value: UserFieldsKey;
 };

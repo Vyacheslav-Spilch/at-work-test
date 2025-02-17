@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container">

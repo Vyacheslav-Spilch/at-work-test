@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ThunkConfig } from './types';
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
 
-export const useSelectorUserId = (id: number) =>
-  useAppSelector((state) => state.users.users.find((user) => user.id === id));
+export const createAppAsyncThunk = createAsyncThunk.withTypes<ThunkConfig>();
