@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MoreIcon } from '@/shared/icons/more';
+import { MoreIcon } from '@/assets/icons/more';
 import imageUser from '@/assets/userImage.jpeg';
 import s from './style.module.css';
 import { DropDownMenu } from '@/shared/ui/drop.down.menu/ui/drop.down.menu';

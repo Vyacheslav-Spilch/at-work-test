@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { UserCard } from '@/entities/index';
-import { Spinner } from '@/shared/icons/spinner';
+import { UserCard } from '@/entities/user/ui/index';
+import { Spinner } from '@/assets/icons/spinner';
 import { selectUserIsLoading } from '@/store/selectors/users/usersSelectors';
 import s from './style.module.css';
 import { IUser, UsersStatus } from '@/entities/user/types/types';

@@ -1,8 +1,8 @@
 import { UseFormRegister } from 'react-hook-form';
 import s from './style.module.css';
 import { UserFieldLabel } from '@/entities/user/types/types';
-import { UserFormType } from '@/entities/user/validation/user.schema';
-import { CloseIcon } from '@/shared/icons/close';
+import { UserFormType } from '@/entities/user/validation/user.form.schema';
+import { CloseIcon } from '@/assets/icons/close';
 import { Input } from '../../input/ui/input';
 
 interface BoxFieldProps {

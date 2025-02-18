@@ -1,6 +1,6 @@
 import { instance } from '@/shared/lib/api/api';
-import { USERS_URL } from './url/users.url';
-import { PARAMS_URL } from '@/shared/lib/api/url/app.url';
+import { USERS_URL } from './urls/users.url';
+import { PARAMS_URL } from '@/shared/lib/api/urls/app.url';
 
 export const APIUsers = {
   fetchAllUsers: ({ limit = 10 }: { limit?: number }) => {

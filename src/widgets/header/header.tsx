@@ -1,4 +1,4 @@
-import { LogoIcon, FavoriteIcon, NotificationIcon } from '@/shared/icons/index';
+import { LogoIcon, FavoriteIcon, NotificationIcon } from '@/assets/icons/index';
 import s from './style.module.css';
 import imageUser from '@/assets/userImage.jpeg';
 import { Link } from 'react-router-dom';

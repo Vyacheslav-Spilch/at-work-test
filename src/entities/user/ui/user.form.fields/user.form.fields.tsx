@@ -6,9 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch } from '@/store/hooks';
 import { BoxField } from '@/shared/ui/index';
 import { CheckForSpaces } from '@/shared/lib/utils/check.for.spaces';
-import { Spinner } from '@/shared/icons/spinner';
+import { Spinner } from '@/assets/icons/spinner';
 import { updateUserInfo } from '@/store/slices/users/usersSlice';
-import { userFormSchema, UserFormType } from '@/entities/user/validation/user.schema';
+import { userFormSchema, UserFormType } from '@/entities/user/validation/user.form.schema';
 import { userFieldList } from '@/entities/user/constants/constants';
 import { IUser } from '@/entities/user/types/types';
 

@@ -1,4 +1,4 @@
-import { CloseIcon, DoneIcon } from '@/shared/icons';
+import { CloseIcon, DoneIcon } from '@/assets/icons';
 import s from './style.module.css';
 
 interface FeedBackProps {

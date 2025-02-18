@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BackIcon } from '../../shared/icons/back';
+import { BackIcon } from '../../assets/icons/back';
 import s from './style.module.css';
 
 interface HeaderTitleProps {
