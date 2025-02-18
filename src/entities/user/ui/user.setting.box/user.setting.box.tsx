@@ -1,7 +1,7 @@
 import s from './style.module.css';
 import imageUser from '@/assets/userImage.jpeg';
-import { IUser } from '@/entities/user/types/types';
 import { userSettingList } from '@/entities/user/constants/constants';
+import { IUser } from '@/entities/user/types/types';
 
 export const UserSettingBox = ({ user }: { user: IUser }) => {
   return (

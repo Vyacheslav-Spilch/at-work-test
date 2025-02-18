@@ -1,16 +1,10 @@
 import { RootState } from '@/store/store';
-import { createSelector } from 'reselect';
 
-export const selectUsersIsActive = createSelector([({ users }: RootState) => users.userList], (users) =>
-  users.filter((user) => !user.isArchive)
-);
+export const selectUsersIsActive = ({ users }: RootState) => users.usersActive;
 
-export const selectUsersIsArchive = createSelector([({ users }: RootState) => users.userList], (users) =>
-  users.filter((user) => user.isArchive)
-);
+export const selectUsersIsArchive = ({ users }: RootState) => users.usersArchive;
 export const selectUserIsLoading = ({ users }: RootState) => users.isLoading;
 
-export const selectUserById =
-  (id: number) =>
-  ({ users }: RootState) =>
-    users.userList.find((user) => user.id === id);
+export const selectUser = ({ users }: RootState) => {
+  return users.user;
+};

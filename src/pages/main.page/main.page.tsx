@@ -10,9 +10,9 @@ export const MainPage = () => {
   return (
     <>
       <Title text="Активные" />
-      <UserCardsGroup users={usersActive} />
+      <UserCardsGroup users={usersActive} status="active" />
       <Title text="Архив" />
-      <UserCardsGroup users={usersArchive} />
+      <UserCardsGroup users={usersArchive} status="archive" />
     </>
   );
 };

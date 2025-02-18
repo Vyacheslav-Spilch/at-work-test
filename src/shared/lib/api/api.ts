@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { APP_PATHS } from './paths/app.paths';
+import { APP_URL } from './url/app.url';
 
 export const instance = axios.create({
-  baseURL: APP_PATHS.rootPath,
+  baseURL: APP_URL.rootPath,
 });

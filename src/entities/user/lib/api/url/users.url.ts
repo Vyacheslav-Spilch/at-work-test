@@ -1,3 +1,3 @@
-export const USERS_PATHS = {
+export const USERS_URL = {
   all: '/users',
 } as const;

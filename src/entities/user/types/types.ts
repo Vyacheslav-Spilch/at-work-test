@@ -27,14 +27,15 @@ export type IUser = {
   phone: string;
   company: string;
   city: string;
-  isArchive: boolean;
 };
 
 export type UserFieldLabel = 'Имя' | 'Никнейм' | 'Почта' | 'Город' | 'Телефон' | 'Название компании';
 
-export type UserFieldsKey = keyof Omit<IUser, 'id' | 'isArchive'>;
+export type UserFieldsKey = keyof Omit<IUser, 'id'>;
 
 export type UserField = {
   label: UserFieldLabel;
   value: UserFieldsKey;
 };
+
+export type UsersStatus = "active" | "archive"

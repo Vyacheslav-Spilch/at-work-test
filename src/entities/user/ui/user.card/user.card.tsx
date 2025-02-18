@@ -4,26 +4,27 @@ import imageUser from '@/assets/userImage.jpeg';
 import s from './style.module.css';
 import { DropDownMenu } from '@/shared/ui/drop.down.menu/ui/drop.down.menu';
 import { shortenText } from '@/shared/lib/utils/shorten.text';
-import { useActionsUserCard } from '../hooks/useActionsUserCard';
+import { useActionsUserCard } from '../../lib/hooks/useActionsUserCard';
+import { UsersStatus } from '../../types/types';
 
 interface UserCardProps {
   id: number;
-  isArchive: boolean;
   username: string;
   city: string;
-  companyName: string;
+  company: string;
+  status: UsersStatus;
 }
 
-export const UserCard = ({ id, isArchive, username, city, companyName }: UserCardProps) => {
+export const UserCard = ({ id, username, status, city, company }: UserCardProps) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
-  const { userActionsList } = useActionsUserCard(isArchive);
+  const { userActionsList } = useActionsUserCard(status);
 
   const onHandleOpenDropMenu = () => {
     setIsOpenDropDown((prev) => !prev);
   };
 
   return (
-    <main className={`${s.container} ${isArchive && s.archive}`}>
+    <main className={`${s.container} ${status === 'archive' && s.archive}`}>
       <img className={s.image} src={imageUser} alt={`Пользователь ${username}`} />
       <section className={s.box_info}>
         <div className={s.box_top}>
@@ -33,7 +34,7 @@ export const UserCard = ({ id, isArchive, username, city, companyName }: UserCar
             <DropDownMenu id={id} isOpenDropDown={isOpenDropDown} itemsMenu={userActionsList} />
           </div>
           <div className={s.box_company}>
-            <span>{companyName}</span>
+            <span>{company}</span>
           </div>
         </div>
         <div className={s.box_city}>

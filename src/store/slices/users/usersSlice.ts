@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser, UserReturnData } from '@/entities/user/types/types';
 import { ThunkConfig } from '@/store/types';
-import { APIUsers } from '@/entities/user/api/api';
+import { APIUsers } from '@/entities/user/lib/api/api';
 import { UsersSliceType } from './types';
 import { createAppAsyncThunk } from '@/store/hooks';
 
 const initialState: UsersSliceType = {
-  userList: [],
+  usersActive: [],
+  usersArchive: [],
+  user: {} as IUser,
   isLoading: 'idle',
   error: null,
 };
@@ -15,28 +17,33 @@ export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    moveToArchive: ({ userList }, action: PayloadAction<{ id: number }>) => {
-      const indexUser = userList.findIndex((user) => user.id === action.payload.id);
+    moveToArchive: ({ usersActive, usersArchive }, action: PayloadAction<{ id: number }>) => {
+      const indexUser = usersActive.findIndex((user) => user.id === action.payload.id);
       if (indexUser !== -1) {
-        userList[indexUser].isArchive = true;
+        usersArchive.push(usersActive[indexUser]);
+        usersActive.splice(indexUser, 1);
       }
     },
-    removeFromArchive: ({ userList }, action: PayloadAction<{ id: number }>) => {
-      const indexUser = userList.findIndex((user) => user.id === action.payload.id);
+    removeFromArchive: ({ usersActive, usersArchive }, action: PayloadAction<{ id: number }>) => {
+      const indexUser = usersArchive.findIndex((user) => user.id === action.payload.id);
       if (indexUser !== -1) {
-        userList[indexUser].isArchive = false;
+        usersActive.push(usersArchive[indexUser]);
+        usersArchive.splice(indexUser, 1);
       }
     },
-    deleteUser: ({ userList }, action: PayloadAction<{ id: number }>) => {
-      const indexUser = userList.findIndex((user) => user.id === action.payload.id);
+    deleteUser: ({ usersActive }, action: PayloadAction<{ id: number }>) => {
+      const indexUser = usersActive.findIndex((user) => user.id === action.payload.id);
       if (indexUser !== -1) {
-        userList.splice(indexUser, 1);
+        usersActive.splice(indexUser, 1);
       }
     },
-    updateUserInfo: ({ userList }, action: PayloadAction<{ user: IUser }>) => {
-      const indexUser = userList.findIndex((user) => user.id === action.payload.user.id);
+    updateUserInfo: (state, action: PayloadAction<{ user: IUser }>) => {
+      state.user = action.payload.user;
+    },
+    fetchUser: (state, action: PayloadAction<{ id: number }>) => {
+      const indexUser = state.usersActive.findIndex((user) => user.id === action.payload.id);
       if (indexUser !== -1) {
-        userList[indexUser] = action.payload.user;
+        state.user = state.usersActive[indexUser];
       }
     },
   },
@@ -47,7 +54,7 @@ export const usersSlice = createSlice({
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isLoading = 'succeeded';
-        state.userList = action.payload;
+        state.usersActive = action.payload;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isLoading = 'failed';
@@ -55,24 +62,6 @@ export const usersSlice = createSlice({
           state.error = action.error.message;
         } else {
           state.error = 'Произошла ошибка при загрузке пользователей';
-        }
-      })
-      .addCase(getUserById.pending, (state) => {
-        state.isLoading = 'pending';
-      })
-      .addCase(getUserById.fulfilled, (state, action) => {
-        state.isLoading = 'succeeded';
-        const indexUser = state.userList.findIndex((user) => user.id === action.payload.id);
-        if (indexUser !== -1) {
-          state.userList[indexUser] = action.payload;
-        }
-      })
-      .addCase(getUserById.rejected, (state, action) => {
-        state.isLoading = 'failed';
-        if (action.error.message) {
-          state.error = action.error.message;
-        } else {
-          state.error = 'Пользователь не найден';
         }
       });
   },
@@ -104,30 +93,5 @@ export const getAllUsers = createAppAsyncThunk<IUser[], void, ThunkConfig>(
   }
 );
 
-export const getUserById = createAppAsyncThunk<IUser, number, ThunkConfig>(
-  `${usersSlice.name}/getUserById`,
-  async (id, { rejectWithValue }) => {
-    try {
-      const { data: user } = await APIUsers.fetchUserById(id);
-      if (user) {
-        return {
-          id: user.id,
-          name: user.name,
-          username: user.username,
-          email: user.email,
-          phone: user.phone,
-          company: user.company.name,
-          city: user.address.city,
-          isArchive: user.isArchive,
-        };
-      } else {
-        throw Error('error');
-      }
-    } catch (err) {
-      return rejectWithValue(`Произошла ошибка: ${err}`);
-    }
-  }
-);
-
-export const { moveToArchive, removeFromArchive, deleteUser, updateUserInfo } = usersSlice.actions;
+export const { moveToArchive, removeFromArchive, deleteUser, updateUserInfo, fetchUser } = usersSlice.actions;
 export default usersSlice.reducer;

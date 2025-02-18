@@ -8,14 +8,16 @@ import { BoxField } from '@/shared/ui/index';
 import { CheckForSpaces } from '@/shared/lib/utils/check.for.spaces';
 import { Spinner } from '@/shared/icons/spinner';
 import { updateUserInfo } from '@/store/slices/users/usersSlice';
-import { IUser } from '@/entities/user/types/types';
 import { userFormSchema, UserFormType } from '@/entities/user/validation/user.schema';
 import { userFieldList } from '@/entities/user/constants/constants';
+import { IUser } from '@/entities/user/types/types';
 
 export const UserFormFields = ({ user }: { user: IUser }) => {
   const dispatch = useAppDispatch();
 
   const [isActiveFeedBack, setIsActiveFeedBack] = useState(false);
+
+  console.log(user);
 
   const {
     register,
@@ -49,7 +51,7 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
     if (CheckForSpaces(data)) {
       dispatch(
         updateUserInfo({
-          user: { ...data, id: user.id, isArchive: user.isArchive },
+          user: { ...data, id: user.id },
         })
       );
       setIsActiveFeedBack(true);
