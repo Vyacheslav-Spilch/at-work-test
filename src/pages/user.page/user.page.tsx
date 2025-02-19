@@ -6,6 +6,7 @@ import { UserSettingBox, UserFormFields } from '@/entities/user/ui/index';
 import { selectUserById, selectUserIsLoading } from '@/store/selectors/users/usersSelectors';
 import { Routers } from '@/app/routers/app.routers';
 import { Spinner } from '@/assets/icons';
+import { useEffect } from 'react';
 
 export const UserPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,9 +15,11 @@ export const UserPage = () => {
   const isLoading = useAppSelector(selectUserIsLoading);
   const user = useAppSelector(selectUserById(userId));
 
-  if (isLoading === 'failed') {
-    navigate(`${Routers.ERROR}`);
-  }
+  useEffect(() => {
+    if ((isLoading === 'succeeded' && !user) || isLoading === 'failed') {
+      navigate(`${Routers.ERROR}`, { replace: true });
+    }
+  }, [isLoading, user]);
 
   return (
     <div className={s.container_user_page}>

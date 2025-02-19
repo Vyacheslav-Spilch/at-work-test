@@ -17,7 +17,8 @@ export const UserCardsGroup = ({ users, status }: UserCardsGroupProps) => {
 
   return (
     <div className={s.container}>
-      {isLoading === 'succeeded' ? (
+      {isLoading === 'pending' && <Spinner />}
+      {isLoading === 'succeeded' &&
         memoUsers.map((user) => (
           <UserCard
             key={user.id}
@@ -27,10 +28,7 @@ export const UserCardsGroup = ({ users, status }: UserCardsGroupProps) => {
             company={user.company}
             city={user.city}
           />
-        ))
-      ) : (
-        <Spinner />
-      )}
+        ))}
     </div>
   );
 };

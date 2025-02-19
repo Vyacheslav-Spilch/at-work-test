@@ -20,7 +20,7 @@ export const UserCard = ({ id, username, status, city, company }: UserCardProps)
   const { userActionsList } = useActionsUserCard(status);
 
   const onHandleOpenDropMenu = () => {
-    setIsOpenDropDown((prev) => !prev);
+    setIsOpenDropDown(prev => !prev);
   };
 
   return (

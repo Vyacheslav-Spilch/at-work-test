@@ -17,8 +17,6 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
 
   const [isActiveFeedBack, setIsActiveFeedBack] = useState(false);
 
-  console.log(user);
-
   const {
     register,
     handleSubmit,
@@ -32,7 +30,7 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
     if (isActiveFeedBack) {
       const timer = setTimeout(() => {
         if (isActiveFeedBack) {
-          setIsActiveFeedBack((prev) => !prev);
+          setIsActiveFeedBack(prev => !prev);
         }
       }, 4000);
       return () => {
@@ -63,7 +61,7 @@ export const UserFormFields = ({ user }: { user: IUser }) => {
       <Title text="Данные профиля" />
       <form className={s.form} onSubmit={handleSubmit(onHandleSubmitUserData)}>
         {user ? (
-          userFieldList.map((field) => (
+          userFieldList.map(field => (
             <div className={s.wrapper} key={field.value}>
               <BoxField
                 label={field.label}
